@@ -34,4 +34,7 @@ func TestAssert(t *testing.T) {
 	assert.Nil(t, nil)
 	assert.Nil(t, neverError)
 
+	assert.False(t, alwaysFalse)
+	assert.True(t, alwaysTrue)
+
 }
