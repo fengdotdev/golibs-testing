@@ -66,7 +66,8 @@ func TestAssertWithMessage(t *testing.T) {
 	assert.NilWithMessage(t, neverError, "This should be nil")
 	assert.FalseWithMessage(t, alwaysFalse, "This should be false")
 	assert.TrueWithMessage(t, alwaysTrue, "This should be true")
-	
+
+
 }
 
 
