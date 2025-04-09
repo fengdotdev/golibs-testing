@@ -14,7 +14,7 @@ func TestNil(t *testing.T) {
 }
 
 func TestNotNIl(t *testing.T) {
-	assert.NotNil(t, alwaysError)
+	assert.NotNil(t,alwaysError )
 	assert.NotNil(t, alwaysTrue)
 	assert.NotNil(t, alwaysFalse)
 	assert.NotNil(t, numberFive)

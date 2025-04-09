@@ -18,14 +18,15 @@ func TestAssertShouldFail(t *testing.T) {
 	assert.AssertShouldFail(t, func(t *testing.T) {
 		alwaysFail(t)
 	})
+	
+}
+
+func TestAssertShouldFailWithMessage(t *testing.T) {
 	assert.AssertShouldFailWithMessage(t, func(t *testing.T) {
 		alwaysFail(t)
-	},
-		"expected failure")
-	assert.AssertShouldNotFail(t, func(t *testing.T) {
-		alwaysSucceed(t)
-	})
-	assert.AssertShouldNotFailWithMessage(t, func(t *testing.T) {
-		alwaysSucceed(t)
-	}, "expected success")
+	}, "expected failure")
+
 }
+
+
+

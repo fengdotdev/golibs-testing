@@ -7,9 +7,7 @@ import (
 	assert "github.com/fengdotdev/golibs-testing/assert"
 )
 
-
 //data
-
 
 var numberFive = 5
 var numeroCinco = 5
@@ -18,15 +16,17 @@ var numeroSeis = 6
 var alwaysTrue = true
 var alwaysFalse = false
 var neverError error = nil
-var alwaysError = errors.New("error")
+var alwaysError = errors.New("error") //nolint:errcheck
 
+func panicFn() {
+	panic("panic")
+}
 
-
-
-
+func notPanicFn() {
+	// do nothing
+}
 
 func TestAssert(t *testing.T) {
-
 
 	//tests
 	assert.Equal(t, numberFive, numeroCinco)
@@ -50,7 +50,6 @@ func TestAssert(t *testing.T) {
 
 }
 
-
 func TestAssertWithMessage(t *testing.T) {
 
 	assert.EqualWithMessage(t, numberFive, numeroCinco, "This should be equal")
@@ -67,7 +66,4 @@ func TestAssertWithMessage(t *testing.T) {
 	assert.FalseWithMessage(t, alwaysFalse, "This should be false")
 	assert.TrueWithMessage(t, alwaysTrue, "This should be true")
 
-
 }
-
-
