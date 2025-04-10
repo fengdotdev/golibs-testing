@@ -32,7 +32,13 @@ func neverPanicFn() {
 
 // this function always fails
 func alwaysFail(t *testing.T) {
-	t.Error("expected failure")
+	t.Helper()
+	t.Errorf("expected failure,ignore this")
+}
+
+// this function always fails
+func alwaysFail2(t *testing.T) {
+	t.FailNow()
 }
 
 // this function always succeeds

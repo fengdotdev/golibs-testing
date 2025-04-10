@@ -1,13 +1,11 @@
 package assert
 
 import (
-
 	"sync"
 	"testing"
 )
 
-// AssertFail executes innerTest and expects it to fail. If innerTest does not fail, the test fails.
-func AssertFail(t *testing.T, innerTest func(t *testing.T)) {
+func AssertNotFail(t *testing.T, innerTest func(t *testing.T)) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
@@ -39,12 +37,12 @@ func AssertFail(t *testing.T, innerTest func(t *testing.T)) {
 	})
 
 	// If innerTest did not fail, report an error
-	if !failed {
-		t.Error("expected innerTest to fail, but it passed")
+	if failed {
+		t.Error("expected innerTest to pass, but it failed")
 	}
 }
 
-func AssertFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+func AssertNotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
@@ -76,7 +74,7 @@ func AssertFailWithMessage(t *testing.T, innerTest func(t *testing.T), message s
 	})
 
 	// If innerTest did not fail, report an error
-	if !failed {
+	if failed {
 		t.Error(message)
 	}
 }
