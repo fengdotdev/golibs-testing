@@ -7,11 +7,11 @@ import (
 )
 
 func Test_Err(t *testing.T) {
-	assert.Error(t, alwaysError)
+	assert.Error(t, errorSome)
 }
 
 func Test_Err_withMsg(t *testing.T) {
-	assert.ErrorWithMessage(t, alwaysError, "This should not be nil")
+	assert.ErrorWithMessage(t, errorSome, "This should not be nil")
 }
 
 func Test_Not_Err(t *testing.T) {

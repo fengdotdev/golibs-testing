@@ -3,7 +3,8 @@ package assert
 import "testing"
 
 // executes the function that u not expect to panic if it does panic the test fails
-func AssertNotpanic(t *testing.T, neverPanicFn func()) {
+func AssertNotPanic(t *testing.T, neverPanicFn func()) {
+	t.Helper()
 	defer func() {
 		if r := recover(); r != nil {
 			t.Errorf("Expected not panic, but got panic")
@@ -13,10 +14,11 @@ func AssertNotpanic(t *testing.T, neverPanicFn func()) {
 }
 
 // executes the function that u not expect to panic with message if it does panic the test fails
-func AssertNotpanicWithMessage(t *testing.T, neverPanicFn func(), message string) {
+func AssertNotPanicWithMessage(t *testing.T, neverPanicFn func(), message string) {
+	t.Helper()
 	defer func() {
 		if r := recover(); r != nil {
-			t.Errorf(message)
+			t.Error(message)
 		}
 	}()
 	neverPanicFn()

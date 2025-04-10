@@ -9,17 +9,17 @@ import (
 )
 
 func TestNotPanic(t *testing.T) {
-	assert.AssertNotpanic(t, notPanicFn)
+	assert.AssertNotPanic(t, neverPanicFn)
 
 }
 
-func TestAssertNotpanicFailsWhenPanics(t *testing.T) {
+func TestAssert_NotPanic_FailsWhenPanics(t *testing.T) {
 	if os.Getenv("TEST_SHOULD_FAIL") == "1" {
-		assert.AssertNotpanic(t, panicFn)
+		assert.AssertNotPanic(t, alwaysPanicFn)
 		return
 	}
 
-	cmd := exec.Command(os.Args[0], "-test.run=TestAssertNotpanicFailsWhenPanics")
+	cmd := exec.Command(os.Args[0], "-test.run=TestAssert_NotPanic_FailsWhenPanics")
 	cmd.Env = append(os.Environ(), "TEST_SHOULD_FAIL=1")
 	err := cmd.Run()
 
@@ -29,16 +29,16 @@ func TestAssertNotpanicFailsWhenPanics(t *testing.T) {
 }
 
 func TestNotPanicWithMessage(t *testing.T) {
-	assert.AssertNotpanicWithMessage(t, notPanicFn, "not panic")
+	assert.AssertNotPanicWithMessage(t, neverPanicFn, "this should not panic, but it did")
 }
 
-func TestAssertNotpanicWithMessageFailsWhenPanics(t *testing.T) {
+func TestAssert_NotPanicWithMessage_FailsWhenPanics(t *testing.T) {
 	if os.Getenv("TEST_SHOULD_FAIL") == "1" {
-		assert.AssertNotpanicWithMessage(t, panicFn, "not panic")
+		assert.AssertNotPanicWithMessage(t, alwaysPanicFn, "this test must fail beause it panics , in a not panic assert")
 		return
 	}
 
-	cmd := exec.Command(os.Args[0], "-test.run=TestAssertNotpanicWithMessageFailsWhenPanics")
+	cmd := exec.Command(os.Args[0], "-test.run=TestAssert_NotPanicWithMessage_FailsWhenPanics")
 	cmd.Env = append(os.Environ(), "TEST_SHOULD_FAIL=1")
 	err := cmd.Run()
 

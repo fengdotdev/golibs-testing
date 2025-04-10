@@ -8,7 +8,8 @@ import (
 )
 
 // AssertShouldFail executes the innerTest function and expects it to fail.
-func AssertShouldFail(t *testing.T, innerTest func(t *testing.T)) {
+func AssertFail(t *testing.T, innerTest func(t *testing.T)) {
+	
 	t.Helper()
 
 	testName := "failCheck" + t.Name()
@@ -31,7 +32,7 @@ func AssertShouldFail(t *testing.T, innerTest func(t *testing.T)) {
 	}
 }
 
-func AssertShouldFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+func AssertFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
 	t.Helper()
 
 	testName := "failCheck" + t.Name()
@@ -54,7 +55,7 @@ func AssertShouldFailWithMessage(t *testing.T, innerTest func(t *testing.T), mes
 	}
 }
 
-func AssertShouldNotFail(t *testing.T, innerTest func(t *testing.T)) {
+func AssertNotFail(t *testing.T, innerTest func(t *testing.T)) {
 	t.Helper()
 
 	testName := "failCheck" + t.Name()
@@ -73,7 +74,7 @@ func AssertShouldNotFail(t *testing.T, innerTest func(t *testing.T)) {
 	}
 }
 
-func AssertShouldNotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+func AssertNotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
 	t.Helper()
 
 	testName := "failCheck" + t.Name()

@@ -1,30 +1,12 @@
 package assert_test
 
 import (
-	"errors"
 	"testing"
 
 	assert "github.com/fengdotdev/golibs-testing/assert"
 )
 
 //data
-
-var numberFive = 5
-var numeroCinco = 5
-var numberSix = 6
-var numeroSeis = 6
-var alwaysTrue = true
-var alwaysFalse = false
-var neverError error = nil
-var alwaysError = errors.New("error") //nolint:errcheck
-
-func panicFn() {
-	panic("panic")
-}
-
-func notPanicFn() {
-	// do nothing
-}
 
 func TestAssert(t *testing.T) {
 
@@ -40,7 +22,7 @@ func TestAssert(t *testing.T) {
 	assert.NoError(t, nil)
 	assert.NoError(t, neverError)
 
-	assert.Error(t, alwaysError)
+	assert.Error(t, errorSome)
 
 	assert.Nil(t, nil)
 	assert.Nil(t, neverError)
@@ -60,7 +42,7 @@ func TestAssertWithMessage(t *testing.T) {
 	assert.NotEqualWithMessage(t, alwaysTrue, alwaysFalse, "This should not be equal")
 	assert.NoErrorWithMessage(t, nil, "This should not be an error")
 	assert.NoErrorWithMessage(t, neverError, "This should not be an error")
-	assert.ErrorWithMessage(t, alwaysError, "This should be an error")
+	assert.ErrorWithMessage(t, errorSome, "This should be an error")
 	assert.NilWithMessage(t, nil, "This should be nil")
 	assert.NilWithMessage(t, neverError, "This should be nil")
 	assert.FalseWithMessage(t, alwaysFalse, "This should be false")
