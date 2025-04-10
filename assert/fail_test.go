@@ -23,5 +23,15 @@ func TestAssert_Fail(t *testing.T) {
 }
 
 func TestAssert_FailWithMessage(t *testing.T) {
+	assert.AssertFailWithMessage(t, func(t *testing.T) {
+		alwaysFail(t)
+	}, "This should fail")
 
+	assert.AssertFailWithMessage(t, func(t *testing.T) {
+		alwaysFail2(t)
+	}, "This should fail")
+
+	assert.AssertFailWithMessage(t, func(t *testing.T) {
+		alwaysPanicFn()
+	}, "This should panic")
 }

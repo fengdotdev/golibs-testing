@@ -30,6 +30,17 @@ func TestAssert(t *testing.T) {
 	assert.False(t, alwaysFalse)
 	assert.True(t, alwaysTrue)
 
+	assert.AssertPanic(t, func() {
+		panic("This should panic")
+	})
+
+	assert.AssertNotPanic(t, func() {
+		// This should not panic
+	})
+
+	assert.AssertFail(t, func(t *testing.T) {
+		t.Errorf("This should fail")
+	})
 }
 
 func TestAssertWithMessage(t *testing.T) {
