@@ -1,6 +1,7 @@
 package assert
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 )
@@ -58,7 +59,7 @@ func AssertNotFailWithMessage(t *testing.T, innerTest func(t *testing.T), messag
 
 // NotFailWithMessage assert a not fail function with message
 // executes the function that u not expect to fail with message if it does fail the test fails
-func NotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+func NotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string, args ...any) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
@@ -89,8 +90,15 @@ func NotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message stri
 
 	})
 
+	m := ""
+	if len(args) > 0 {
+		m = fmt.Sprintf(message, args...)
+	} else {
+		m = message
+	}
+
 	// If innerTest did not fail, report an error
 	if failed {
-		t.Error(message)
+		t.Error(m)
 	}
 }

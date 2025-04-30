@@ -14,10 +14,3 @@ func Test_Err_withMsg(t *testing.T) {
 	assert.ErrorWithMessage(t, errorSome, "This should not be nil")
 }
 
-func Test_Not_Err(t *testing.T) {
-	assert.NoError(t, nil)
-}
-
-func Test_Not_Err_withMsg(t *testing.T) {
-	assert.NoErrorWithMessage(t, nil, "This should be nil")
-}

@@ -1,12 +1,13 @@
 package assert
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
 
-// equal checks if the expected and actual values are equal.
-
+// equal asserts that two values are equal.
+// If they are not equal, it reports an error with the message "Expected <expected>, but got <actual>".
 func Equal(t *testing.T, expected, actual interface{}) {
 	t.Helper()
 
@@ -17,29 +18,23 @@ func Equal(t *testing.T, expected, actual interface{}) {
 	}
 }
 
-func EqualWithMessage(t *testing.T, expected, actual interface{}, message string) {
+
+// EqualWithMessage asserts that two values are equal, and if not, it reports an error with a custom message.
+// The message can be formatted with additional arguments if provided.
+func EqualWithMessage(t *testing.T, expected, actual interface{}, message string, args ...any) {
 	t.Helper()
+
+	m := ""
+	if len(args) > 0 {
+		m = fmt.Sprintf(message, args...)
+	} else {
+		m = message
+	}
 
 	eq := reflect.DeepEqual(expected, actual)
 
 	if !eq {
-		t.Errorf(message)
+		t.Errorf(m)
 	}
 }
 
-func NotEqual(t *testing.T, expected, actual interface{}) {
-	t.Helper()
-
-	eq := reflect.DeepEqual(expected, actual)
-	if eq {
-		t.Errorf("Expected %v to not be equal to %v", expected, actual)
-	}
-}
-
-func NotEqualWithMessage(t *testing.T, expected, actual interface{}, message string) {
-	t.Helper()
-	eq := reflect.DeepEqual(expected, actual)
-	if eq {
-		t.Errorf(message)
-	}
-}

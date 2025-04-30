@@ -45,3 +45,23 @@ func alwaysFail2(t *testing.T) {
 func alwaysSucceed(t *testing.T) {
 	t.Log("expected success")
 }
+
+
+
+type Foo struct {
+	A int
+	B string
+	C bool
+}
+
+type Bar struct {
+	A int
+	B string
+	C bool
+}
+
+type Baz struct {
+	A int
+	B string
+	C bool
+}
