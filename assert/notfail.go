@@ -5,7 +5,15 @@ import (
 	"testing"
 )
 
+// deprecated: use NotFail instead
 func AssertNotFail(t *testing.T, innerTest func(t *testing.T)) {
+	t.Helper()
+	NotFail(t, innerTest)
+}
+
+// NotFail assert a not fail function
+// executes the function that u not expect to fail if it does fail the test fails
+func NotFail(t *testing.T, innerTest func(t *testing.T)) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
@@ -42,7 +50,15 @@ func AssertNotFail(t *testing.T, innerTest func(t *testing.T)) {
 	}
 }
 
+// deprecated: use NotFailWithMessage instead
 func AssertNotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+	t.Helper()
+	NotFailWithMessage(t, innerTest, message)
+}
+
+// NotFailWithMessage assert a not fail function with message
+// executes the function that u not expect to fail with message if it does fail the test fails
+func NotFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest

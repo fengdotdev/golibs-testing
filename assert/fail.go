@@ -1,13 +1,22 @@
 package assert
 
 import (
-
 	"sync"
 	"testing"
 )
 
-// AssertFail executes innerTest and expects it to fail. If innerTest does not fail, the test fails.
+
+// deprecated: use AssertFail instead
 func AssertFail(t *testing.T, innerTest func(t *testing.T)) {
+	t.Helper()
+	Fail(t, innerTest)
+}
+
+
+
+// Fail asserts that the innerTest function fails. It runs the innerTest in a goroutine and checks if it fails.
+// If innerTest does not fail, it reports an error.
+func Fail(t *testing.T, innerTest func(t *testing.T)) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
@@ -44,7 +53,17 @@ func AssertFail(t *testing.T, innerTest func(t *testing.T)) {
 	}
 }
 
+
+// deprecated: use AssertFailWithMessage instead
 func AssertFailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
+	t.Helper()
+	FailWithMessage(t, innerTest, message)
+}
+
+
+// FailWithMessage asserts that the innerTest function fails. It runs the innerTest in a goroutine and checks if it fails.
+// If innerTest does not fail, it reports an error with the provided message.
+func FailWithMessage(t *testing.T, innerTest func(t *testing.T), message string) {
 	t.Helper()
 
 	// Create a subtest to capture the failure state of innerTest
